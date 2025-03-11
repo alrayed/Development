@@ -1,6 +1,6 @@
 Project name: Restaurant management system
 Project Features:
-LOading..;
+Loading..;
 
 
 Getting Started
