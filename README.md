@@ -5,6 +5,7 @@
 <img src="image.png" alt= "Main window" height="300">
 
 ## Installation steps:
+### windows
 open windows powershell and paste the following command(skip if git already install):
 ```
 winget install --id Git.Git -e --source winget
@@ -20,5 +21,16 @@ cd restaurant-management-system
 npm install
 ```
 ```
+npm start
+```
+### linux/Unix
+```
+sudo apt update
+sudo apt install git
+git clone https://github.com/yourusername/restaurant-management-system.git
+cd restaurant-management-system
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+sudo apt-get install -y nodejs
+npm install
 npm start
 ```
