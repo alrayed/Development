@@ -1,0 +1,81 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 206, 58, 0.7); /* yellow with transparency */
+  padding: 1rem 2rem;
+  border-radius: 0 0 1.5rem 1.5rem; /* only bottom corners rounded */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  backdrop-filter: blur(8px); /* blur effect */
+  -webkit-backdrop-filter: blur(8px); /* Safari support */
+}
+
+
+.navbar-logo {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: lighter;
+}
+
+.navbar-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.navbar-links a:hover {
+  color: #ff9800;
+}
+
+.navbar-actions {
+  display: flex;
+  gap: 1.5rem;
+
+}
+
+.navbar-icon {
+  color: #ffffff;
+  font-size: 1.3rem;
+  background-color: #ffffff00;
+  border: none;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.navbar-icon:hover {
+  color: #ff9800;
+}
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navbar-divider {
+  display: inline-block;
+  width: 1px;
+  height: 24px;
+  background: #fff;
+  opacity: 0.3;
+  margin: 0 0.5rem;
+  border-radius: 1px;
+}
