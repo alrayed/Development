@@ -1,38 +1,244 @@
-.App {
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+body {
+  background: #ffa71a;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+}
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+.app-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 300px;
+  padding: 2rem;
+}
+
+.main-content {
+  flex: 1;
+}
+
+.burger-img {
+  width: 500px;
+  height: auto;
+} 
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin: 2rem;
+}
+
+.food-card {
+  background: rgba(255,255,255,0.85);
+  border-radius: 2rem;
+  padding: 1rem;
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.food-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+}
+
+.food-card button {
+  margin-top: 0.5rem;
+  padding: 0.4rem 1rem;
+  border: none;
+  background: #ff9800;
+  color: #5e5e5ed5;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 320px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: -2px 0 12px rgba(0,0,0,0.15);
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-sidebar h2 {
+  margin-top: 0;
+}
+
+.cart-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.cart-sidebar li {
+  margin-bottom: 0.5rem;
+}
+
+.order-btn {
+  width: 100%;
+  padding: 0.7rem;
+  background: #ff9800;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+
+
+.burger-img {
+  width: 320px;
+  max-width: 100%;
+  border-radius: 1rem;
+  display: block;
+  object-fit: cover;
+  height: auto;
+  max-height: 100%;
+}
+.hero-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.hero-welcome {
+  color: #e67c00;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0rem;
+  letter-spacing: 0.5px;
+}
+.hero-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #222;
+  line-height: 1.1;
+  margin: 0;
+  letter-spacing: -1px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.hero-mini-burgers img {
+  height: 2.5rem;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+.hero-menu-btn {
+  background: #e67c00;
+  color: #fff;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.7rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background 0.2s;
+}
+.hero-menu-btn:hover {
+  background: #ff9800;
+}
+
+.hero-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.burger-img-large {
+  width: 500px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 1.5rem;
+  background: #ffffff00;
+}
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffa71a;
+  margin: 0;
+  max-width: 1200px;
+  min-height: 350px;
+  padding: 2rem;
+
+  box-shadow: 0;
+}
+.footer {
+  width: 100%;
+  background: #ffce3a;
+  color: #a85b00;
+  text-align: center;
+  padding: 1.2rem 0;
+  font-size: 1.1rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  margin-top: 2rem;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+}
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.footer-links {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+@media (max-width: 900px) {
+  .hero-section {
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+    min-height: unset;
+  }
+  .hero-right {
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  .burger-img-large {
+    width: 220px;
+  }
+  .hero-title {
+    font-size: 2rem;
+  }
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
