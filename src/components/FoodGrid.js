@@ -3,11 +3,7 @@ import React, { useEffect, useState } from 'react';
 const LOCAL_KEY = 'admin_items';
 // Example fallbackItems in FoodGrid.js and AdminPanel.js
 const fallbackItems = [
-  { id: 1, name: 'Classic Burger', price: 5.99, img: '', category: 'Fast Food' },
-  { id: 2, name: 'Cheese Burger', price: 6.99, img: '', category: 'Fast Food' },
-  { id: 3, name: 'Chocolate Cake', price: 4.99, img: '', category: 'Dessert' },
-  { id: 4, name: 'Orange Juice', price: 2.99, img: '', category: 'Cool Drink' },
-  { id: 5, name: 'Pancakes', price: 3.99, img: '', category: 'Breakfast' },
+
 ];
 
 const FoodGrid = ({ onAdd, selectedCategory }) => {
