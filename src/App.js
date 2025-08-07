@@ -9,6 +9,7 @@ import Account from './components/Account';
 import Chatbot from './components/Chatbot';
 import SignUp from './components/SignUp';
 import  About from './components/about';
+import Payment from './components/Payment';
 const Footer = () => (
   <footer className="footer">
     <div className="footer-content">
@@ -47,12 +48,25 @@ const App = () => {
   };
 
   const handleOrder = () => {
-    alert('Order placed!');
-    setCart([]);
+    setShowPayment(true);
     setCartOpen(false);
   };
   const [user, setUser] = useState(() => JSON.parse(localStorage.getItem("user") || "null"));
   const [accountOpen, setAccountOpen] = useState(false);
+  const [showPayment, setShowPayment] = useState(false);
+  const handlePaymentComplete = () => {
+  // Save order to localStorage
+  const orders = JSON.parse(localStorage.getItem("orders") || "[]");
+  const newOrder = {
+    id: Date.now(),
+    items: cart,
+    user: user,
+    date: new Date().toLocaleString(),
+  };
+  localStorage.setItem("orders", JSON.stringify([...orders, newOrder]));
+  setShowPayment(false);
+  setCart([]);
+};
  const handleSignup = () => {
   setUser(JSON.parse(localStorage.getItem("user")));
   setAccountOpen(false);
@@ -65,6 +79,7 @@ const App = () => {
   setAccountOpen(false);
   window.location.hash = "#signup";
 };
+
 
   return (
     <Router>
@@ -115,6 +130,11 @@ const App = () => {
                   onOrder={handleOrder}
                 />
               )}
+              {showPayment && (
+  <div className="payment-modal">
+    <Payment onComplete={handlePaymentComplete} />
+  </div>
+)}
               <Footer />
               {user && (
   <div className={`account-slide-panel${accountOpen ? " open" : ""}`}>

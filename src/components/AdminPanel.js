@@ -21,10 +21,14 @@ const AdminPanel = () => {
   const [pass, setPass] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const [loginError, setLoginError] = useState('');
+const [orders, setOrders] = useState(() => JSON.parse(localStorage.getItem("orders") || "[]"));
 
-  useEffect(() => {
-    localStorage.setItem(LOCAL_KEY, JSON.stringify(items));
-  }, [items]);
+useEffect(() => {
+  const interval = setInterval(() => {
+    setOrders(JSON.parse(localStorage.getItem("orders") || "[]"));
+  }, 1000); // update every second
+  return () => clearInterval(interval);
+}, []);
 
   const handleAdd = () => {
     if (!newItem.name || !newItem.price) return;
@@ -149,6 +153,27 @@ const AdminPanel = () => {
           )}
         </tbody>
       </table>
+
+      {}
+      <div className="admin-orders" style={{ marginTop: 32 }}>
+        <h3>Orders</h3>
+        {orders.length === 0 ? (
+          <div>No orders yet.</div>
+        ) : (
+          <ul>
+            {orders.map(order => (
+              <li key={order.id} style={{ marginBottom: 16 }}>
+                <b>{order.user?.name || "Unknown User"}</b> ({order.date})<br />
+                {order.items.map(item => (
+                  <span key={item.id}>{item.name} x {item.qty} &nbsp;</span>
+                ))}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+      {/* End orders block */}
+
     </div>
   );
 };

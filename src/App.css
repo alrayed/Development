@@ -89,6 +89,15 @@ a {
   text-decoration: none;
   font-weight: 600;
 }
+.payment-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:#fffbe7;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .category-panel {
   display: flex;
   gap: 1rem;
