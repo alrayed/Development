@@ -104,8 +104,9 @@ const App = () => {
                 </div>
                 <div className="hero-right">
                   <img
-                    className="burger-img-large"
-                    src="https://i.postimg.cc/VvKXVSPF/burger.png"
+                    className="burger-img-lar
+                    
+                   src="https://i.postimg.cc/VvKXVSPF/burger.png"
                     alt="Burger"
                   />
                 </div>
