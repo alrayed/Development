@@ -1,12 +1,31 @@
 import React, { useState } from 'react';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import FoodGrid from './components/FoodGrid';
 import Cart from './components/Cart';
+import AdminPanel from './components/AdminPanel';
 import './App.css';
+import Account from './components/Account';
+import Chatbot from './components/Chatbot';
+import SignUp from './components/SignUp';
+import  About from './components/about';
+const Footer = () => (
+  <footer className="footer">
+    <div className="footer-content">
+      © {new Date().getFullYear()} Burgers TNC. All rights reserved.
+    </div>
+    <div className="footer-links">
+      <a href="/privacy-policy">Privacy Policy</a>
+      <a href="/terms-of-service">Terms of Service</a>
+      <a href="/contact">Contact Us</a>
+    </div>
+  </footer>
+);
 
 const App = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [cart, setCart] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('All');
   React.useEffect(() => {
     const handler = (e) => {
       if (e.detail === 'cart') setCartOpen(true);
@@ -32,56 +51,88 @@ const App = () => {
     setCart([]);
     setCartOpen(false);
   };
+  const [user, setUser] = useState(() => JSON.parse(localStorage.getItem("user") || "null"));
+  const [accountOpen, setAccountOpen] = useState(false);
+ const handleSignup = () => {
+  setUser(JSON.parse(localStorage.getItem("user")));
+  setAccountOpen(false);
+  window.location.hash = "#/";
+};
+
+ const handleLogout = () => {
+  localStorage.removeItem("user");
+  setUser(null);
+  setAccountOpen(false);
+  window.location.hash = "#signup";
+};
 
   return (
-    <>
-      <Navbar onCartClick={() => setCartOpen(true)} />
-<div className="hero-section">
-  <div className="hero-left">
-    <span className="hero-welcome">Welcome to Burgers TNC</span>
-    <h1 className="hero-title">
-      Crafting Timeless<br />
-      Flavors, One Bite<br />
-      at a Time
-      <span className="hero-mini-burgers">
-        <img src="/assist/mini-burgers.png" alt="Mini Burgers" />
-      </span>
-    </h1>
-    <button className="hero-menu-btn">View Menu</button>
-  </div>
-  <div className="hero-right">
-    <img
-      className="burger-img-large"
-      src="/assist/burger.png"
-      alt="Burger"
-    />
-  </div>
-</div>
-      <div className="food-bg">
-        <FoodGrid onAdd={handleAdd} />
-      </div>
-      {cartOpen && (
-        <Cart
-          items={cart}
-          onClose={() => setCartOpen(false)}
-          onOrder={handleOrder}
+    <Router>
+      <Routes>
+        <Route
+          path="/signup"
+          element={<SignUp onSignup={handleSignup} />}
         />
-      )}
-      <Footer />
-    </>
+        
+        <Route
+          path="/"
+          element={
+            <>
+              <Navbar onCartClick={() => setCartOpen(true)} onAccountClick={() => setAccountOpen(true)} />
+              <div className="hero-section">
+                <div className="hero-left">
+                  <span className="hero-welcome">Welcome to Burgers TNC</span>
+                  <h1 className="hero-title">
+                    Crafting Timeless Flavors<br />
+                  </h1>
+                  <button className="hero-menu-btn">View Menu</button>
+                </div>
+                <div className="hero-right">
+                  <img
+                    className="burger-img-large"
+                    src="/assist/burger.png"
+                    alt="Burger"
+                  />
+                </div>
+              </div>
+<div className="category-panel">
+  {['All', 'Dessert', 'Cool Drink', 'Breakfast', 'Fast Food'].map(cat => (
+    <button
+      key={cat}
+      className={selectedCategory === cat ? 'category-btn active' : 'category-btn'}
+      onClick={() => setSelectedCategory(cat)}
+    >
+      {cat}
+    </button>
+  ))}
+</div>
+<FoodGrid onAdd={handleAdd} selectedCategory={selectedCategory} />
+        
+              {cartOpen && (
+                <Cart
+                  items={cart}
+                  onClose={() => setCartOpen(false)}
+                  onOrder={handleOrder}
+                />
+              )}
+              <Footer />
+              {user && (
+  <div className={`account-slide-panel${accountOpen ? " open" : ""}`}>
+    <button className="close-btn" onClick={() => setAccountOpen(false)}>×</button>
+    <Account onLogout={handleLogout} />
+  </div>
+)}
+            </>
+          }
+        />
+
+        <Route path="/admin" element={<AdminPanel />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+      <Chatbot />
+    </Router>
   );
 };
-const Footer = () => (
-  <footer className="footer">
-    <div className="footer-content">
-      © {new Date().getFullYear()} Burgers TNC. All rights reserved.
-    </div>
-    <div className="footer-links">
-      <a href="/privacy-policy">Privacy Policy</a>
-      <a href="/terms-of-service">Terms of Service</a>
-      <a href="/contact">Contact Us</a>
-    </div>
-  </footer>
-);
-export { Footer };
+
 export default App;
