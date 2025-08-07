@@ -1,35 +1,54 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-const foods = [
-  { id: 1, name: 'Burger', img: '/assist/burger.png', price: 5 },
-  { id: 2, name: 'Pizza', img: '/assist/pizza.png', price: 8 },
-  { id: 3, name: 'Fries', img: '/assist/fries.png', price: 3 },
-  { id: 4, name: 'Sandwich', img: '/assist/sandwich.png', price: 4 },
-  { id: 5, name: 'Taco', img: '/assist/taco.png', price: 6 },
-  { id: 6, name: 'Salad', img: '/assist/salad.png', price: 4 },
-  { id: 7, name: 'Hotdog', img: '/assist/hotdog.png', price: 5 },
-  { id: 8, name: 'Nuggets', img: '/assist/nuggets.png', price: 4 },
-  { id: 9, name: 'Wrap', img: '/assist/wrap.png', price: 5 },
-  { id: 10, name: 'Steak', img: '/assist/steak.png', price: 12 },
-  { id: 11, name: 'Soup', img: '/assist/soup.png', price: 4 },
-  { id: 12, name: 'Pasta', img: '/assist/pasta.png', price: 7 },
-  { id: 13, name: 'Rice Bowl', img: '/assist/ricebowl.png', price: 6 },
-  { id: 14, name: 'Ice Cream', img: '/assist/icecream.png', price: 3 },
-  { id: 15, name: 'Cake', img: '/assist/cake.png', price: 4 },
-  { id: 16, name: 'Juice', img: '/assist/juice.png', price: 2 },
+const LOCAL_KEY = 'admin_items';
+// Example fallbackItems in FoodGrid.js and AdminPanel.js
+const fallbackItems = [
+  { id: 1, name: 'Classic Burger', price: 5.99, img: '', category: 'Fast Food' },
+  { id: 2, name: 'Cheese Burger', price: 6.99, img: '', category: 'Fast Food' },
+  { id: 3, name: 'Chocolate Cake', price: 4.99, img: '', category: 'Dessert' },
+  { id: 4, name: 'Orange Juice', price: 2.99, img: '', category: 'Cool Drink' },
+  { id: 5, name: 'Pancakes', price: 3.99, img: '', category: 'Breakfast' },
 ];
 
-const FoodGrid = ({ onAdd }) => (
-  <div className="food-grid">
-    {foods.map(food => (
-      <div className="food-card" key={food.id}>
-        <img src={food.img} alt={food.name} className="food-img" />
-        <div>{food.name}</div>
-        <div>${food.price}</div>
-        <button onClick={() => onAdd(food)}>Add to Cart</button>
-      </div>
-    ))}
-  </div>
-);
+const FoodGrid = ({ onAdd, selectedCategory }) => {
+  const [items, setItems] = useState(() => {
+    const saved = localStorage.getItem(LOCAL_KEY);
+    return saved ? JSON.parse(saved) : fallbackItems;
+  });
+
+  // Listen for changes in localStorage (e.g., from AdminPanel)
+  useEffect(() => {
+    const syncItems = () => {
+      const saved = localStorage.getItem(LOCAL_KEY);
+      setItems(saved ? JSON.parse(saved) : fallbackItems);
+    };
+    window.addEventListener('storage', syncItems);
+    return () => window.removeEventListener('storage', syncItems);
+  }, []);
+
+  // Also update when the component mounts (in case AdminPanel updated in same tab)
+  useEffect(() => {
+    const saved = localStorage.getItem(LOCAL_KEY);
+    setItems(saved ? JSON.parse(saved) : fallbackItems);
+  }, []);
+ const filteredItems = selectedCategory && selectedCategory !== 'All'
+    ? items.filter(item => item.category === selectedCategory)
+    : items;
+return (
+    <div className="food-grid">
+      {filteredItems.map(item => (
+        <div className="food-card" key={item.id}>
+          {item.img
+            ? <img className="food-img" src={item.img} alt={item.name} style={{ width: 80, height: 80, borderRadius: 12, objectFit: 'cover', marginBottom: 8 }} />
+            : <div className="food-img" style={{ fontSize: 48, marginBottom: 8 }}>🍔</div>
+          }
+          <h3>{item.name}</h3>
+          <p>${item.price.toFixed(2)}</p>
+          <button onClick={() => onAdd(item)}>Add to Cart</button>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 export default FoodGrid;

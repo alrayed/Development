@@ -1,18 +1,22 @@
 .navbar {
+  margin-top: 1rem;
+  margin-left:1rem;
+  margin-right:1rem;
+  position: top;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(255, 206, 58, 0.7); /* yellow with transparency */
-  padding: 1rem 2rem;
-  border-radius: 0 0 1.5rem 1.5rem; /* only bottom corners rounded */
+  background: rgba(255, 255, 255, 0.7);
+  padding: 1rem 1rem;
+  border-radius: 1.5rem 1.5rem 1.5rem 1.5rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  backdrop-filter: blur(8px); /* blur effect */
-  -webkit-backdrop-filter: blur(8px); /* Safari support */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 
 .navbar-logo {
-  color: #fff;
+  color: #e67f32;
   font-size: 1.5rem;
   font-weight: lighter;
 }
@@ -36,7 +40,8 @@
 }
 
 .navbar-links a {
-  color: #fff;
+  color: #000000;
+  position: middle;
   text-decoration: none;
   font-size: 1rem;
   transition: color 0.2s;
@@ -53,11 +58,10 @@
 }
 
 .navbar-icon {
-  color: #ffffff;
+  color: #000000;
   font-size: 1.3rem;
   background-color: #ffffff00;
   border: none;
-  text-decoration: none;
   transition: color 0.2s;
 }
 
@@ -74,8 +78,5 @@
   display: inline-block;
   width: 1px;
   height: 24px;
-  background: #fff;
-  opacity: 0.3;
-  margin: 0 0.5rem;
-  border-radius: 1px;
+  background: #000000;
 }
