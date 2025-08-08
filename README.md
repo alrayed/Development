@@ -1,4 +1,15 @@
 # Project name: Restaurant management system
+default otp:1234
+default admin id:admin, password:1244 
+useful link:
+1.host:
+```
+https://alrayed.github.io/Development/
+```
+2.adminpanal:
+```
+https://alrayed.github.io/Development/#admin
+```
 ## Project Features:
 * Loading..
 ## screenshots
